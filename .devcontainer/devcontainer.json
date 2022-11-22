@@ -4,9 +4,5 @@
 		"dockerfile": "Dockerfile"
 	},
 	"remoteUser": "vscode",
-	"features": {
-		"ghcr.io/devcontainers/features/docker-in-docker": "latest",
-		"ghcr.io/devcontainers/features/github-cli": "latest",
-		"ghcr.io/devcontainers/features/aws-cli": "latest"
-	}
+	"features": {}
 }
