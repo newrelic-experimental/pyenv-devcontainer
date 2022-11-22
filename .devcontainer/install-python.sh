@@ -4,7 +4,7 @@ set -e
 SED=$(which gsed || which sed)
 
 SCRIPT_DIR=$(dirname "$0")
-PIP_REQUIREMENTS=$(cat $SCRIPT_DIR/requirements.txt)
+PIP_REQUIREMENTS=$(cat /requirements.txt)
 
 main() {
     # Coerce space separated string to array
