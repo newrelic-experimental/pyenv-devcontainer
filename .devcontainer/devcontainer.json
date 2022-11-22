@@ -1,0 +1,15 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/ubuntu
+{
+	"name": "pyenv-devcontainer",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": { "VARIANT": "jammy" }
+	},
+	"remoteUser": "vscode",
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker": "latest",
+		"ghcr.io/devcontainers/features/github-cli": "latest",
+		"ghcr.io/devcontainers/features/aws-cli": "latest"
+	}
+}
