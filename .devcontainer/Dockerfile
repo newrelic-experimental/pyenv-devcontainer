@@ -1,8 +1,4 @@
-# See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/ubuntu/.devcontainer/base.Dockerfile
-
-# [Choice] Ubuntu version (use ubuntu-22.04 or ubuntu-18.04 on local arm64/Apple Silicon): ubuntu-22.04, ubuntu-20.04, ubuntu-18.04
-ARG VARIANT="jammy"
-FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
+FROM mcr.microsoft.com/vscode/devcontainers/base:jammy
 
 # Install OS packages
 RUN export DEBIAN_FRONTEND=noninteractive && \
@@ -51,7 +47,7 @@ ENV LANG=en_US.UTF-8 \ LANGUAGE=en_US:en \ LC_ALL=en_US.UTF-8
 USER 1000:1000
 ENV HOME /home/vscode
 
-# Install PyEnv
+# Install pyenv
 ENV PYENV_ROOT="${HOME}/.pyenv"
 RUN curl https://pyenv.run/ | /bin/bash
 ENV PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:${PATH}"
