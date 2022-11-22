@@ -1,4 +1,4 @@
-name: Deploy
+name: Build
 
 on:
   workflow_dispatch:  # Allow manual trigger
@@ -59,10 +59,10 @@ jobs:
             python --version
 
       - name: Publish Image
+        if: github.event_name != 'pull_request'
         uses: docker/build-push-action@v3
         with:
           context: .
           build-args: BASE=devcontainer-base
-          push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
