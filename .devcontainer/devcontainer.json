@@ -1,0 +1,8 @@
+{
+	"name": "pyenv-devcontainer",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"remoteUser": "vscode",
+	"features": {}
+}
