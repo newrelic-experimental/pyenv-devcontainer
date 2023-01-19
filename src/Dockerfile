@@ -12,7 +12,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         fontconfig \
         gcc \
         git \
-        lib32z1-dev \
         libbz2-dev \
         libffi-dev \
         libgmp-dev \
