@@ -57,5 +57,5 @@ RUN echo 'eval "$(pyenv init -)"' >>$HOME/.bashrc && \
 ARG PYTHON_VERSIONS="3.10"
 COPY --chown=1000:1000 --chmod=+x ./install-python.sh /tmp/install-python.sh
 COPY ./requirements.txt /requirements.txt
-RUN /tmp/install-python.sh && \
-    rm /tmp/install-python.sh
+# RUN /tmp/install-python.sh && \
+#     rm /tmp/install-python.sh
