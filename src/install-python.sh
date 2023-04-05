@@ -1,10 +1,19 @@
 #!/bin/bash
-set -e
+# Copyright 2010 New Relic, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-SED=$(which gsed || which sed)
-
-SCRIPT_DIR=$(dirname "$0")
-PIP_REQUIREMENTS=$(cat /requirements.txt)
+set -euo pipefail
 
 main() {
     # Coerce space separated string to array
@@ -20,7 +29,7 @@ main() {
     # Find all latest pyenv supported versions for requested python versions
     PYENV_VERSIONS=()
     for v in "${PYTHON_VERSIONS[@]}"; do
-        LATEST=$(get_latest_patch_version "$v")
+        LATEST=$(pyenv latest -k "$v" || pyenv latest -k "$v-dev")
         if [[ -z "$LATEST" ]]; then
             echo "Latest version could not be found for ${v}." 1>&2
             exit 1
@@ -34,24 +43,11 @@ main() {
     done
     wait
 
-    # Install dependencies for each version
-    for v in "${PYENV_VERSIONS[@]}"; do
-        PYENV_VERSION=$v pyenv exec pip install --upgrade $PIP_REQUIREMENTS
-    done
-
     # Set all installed versions as globally accessible
     pyenv global ${PYENV_VERSIONS[@]}
-}
-
-get_latest_patch_version() {
-    pyenv install --list |  # Get all python versions
-        $SED 's/^ *//g' |  # Remove leading whitespace
-        grep -E "^$1" |  # Find specified version by matching start of line
-        grep -v -- "-c-jit-latest" |  # Filter out pypy JIT versions
-        $SED -E '/(-[a-zA-Z]+$)|(a[0-9]+)|(b[0-9]+)|(rc[0-9]+)/!{s/$/_/}' |  # Append trailing _ to any non development versions to place them lower when sorted
-        sort -V |  # Sort using version sorting
-        $SED 's/_$//' |  # Remove any added trailing underscores to correct version names
-        tail -1  # Grab last result as latest version
+    
+    # Install dependencies for main python installation
+    pyenv exec pip install --upgrade -r /requirements.txt
 }
 
 main
