@@ -225,15 +225,6 @@ Distributed under the following license(s):
   * [The MIT License](http://opensource.org/licenses/MIT)
 
 
-## [tox-factor](https://pypi.org/project/tox-factor)
-
-Copyright (c) 2019 Ryan P Kilby
-
-Distributed under the following license(s):
-
-  * [The BSD 3-Clause License](http://opensource.org/licenses/BSD-3-clause)
-
-
 ## [urllib3](https://pypi.org/project/urllib3)
 
 Copyright (c) 2008-2020 Andrey Petrov and contributors (see CONTRIBUTORS.txt)

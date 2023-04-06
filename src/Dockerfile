@@ -61,11 +61,10 @@ RUN /tmp/install-python.sh && \
     rm /tmp/install-python.sh
 
 # Install development dependencies
-ARG DEVELOP_DEPENDENCIES="bandit black flake8 isort tox<4"
+ARG DEVELOP_DEPENDENCIES="bandit black flake8 isort tox"
 RUN /bin/bash -c '\
     DEVELOP_DEPENDENCIES=($DEVELOP_DEPENDENCIES); \
     pyenv exec pip install pipx; \
     for v in "${DEVELOP_DEPENDENCIES[@]}"; do \
         pipx install $v; \
-    done; \
-    pipx inject tox tox-factor'
+    done'
