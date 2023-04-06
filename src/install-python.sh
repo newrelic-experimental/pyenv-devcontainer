@@ -20,7 +20,7 @@ main() {
     # Find all latest pyenv supported versions for requested python versions
     PYENV_VERSIONS=()
     for v in "${PYTHON_VERSIONS[@]}"; do
-        LATEST=$(get_latest_patch_version "$v")
+        LATEST=$(pyenv latest -k "$v" || get_latest_patch_version "$v")
         if [[ -z "$LATEST" ]]; then
             echo "Latest version could not be found for ${v}." 1>&2
             exit 1
